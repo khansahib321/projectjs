@@ -1,0 +1,34 @@
+
+const imageDiv = document.getElementById('image');
+const undoButton = document.getElementById('undo');
+
+
+const originalText = "Hover over an image below to display here";
+const originalBackground = "";
+
+
+function upDate(event) {
+    console.log("upDate triggered!");
+    const previewPic = event.target;
+
+    console.log("Hovered image alt:", previewPic.alt);
+    console.log("Hovered image src:", previewPic.src);
+
+    // Update the text content and background image of the preview container
+    imageDiv.textContent = previewPic.alt;
+    imageDiv.style.backgroundImage = `url(${previewPic.src})`;
+}
+
+function undo() {
+    console.log("Undo triggered!");
+
+    imageDiv.textContent = originalText;
+    imageDiv.style.backgroundImage = originalBackground;
+}
+
+const thumbnails = document.querySelectorAll('.thumbnail');
+thumbnails.forEach((thumbnail) => {
+    thumbnail.addEventListener('mouseover', upDate); // Trigger upDate on hover
+});
+
+undoButton.addEventListener('click', undo);
